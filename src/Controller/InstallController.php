@@ -241,6 +241,8 @@ class InstallController extends AppController
         if ($this->request->is('post')) {
             $html = $this->request->getData('site_style_vars');
             file_put_contents($site_style_vars_file, $html);
+            file_put_contents(CONFIG . 'site_style_vars.css', $html);
+            $this->redirect(['action' => 'finish']);
         }
         $this->set('site_style_vars_file', file_get_contents($site_style_vars_file));
         $this->set('title_for_layout', 'SwRI SOC Config');
