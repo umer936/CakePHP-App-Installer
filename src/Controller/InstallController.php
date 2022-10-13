@@ -236,7 +236,8 @@ class InstallController extends AppController
 
 
     public function socParams() {
-        $site_style_vars_file = 'plugins/CakePHPAppInstaller/webroot/css/site_style_vars.css';
+        //$site_style_vars_file = 'plugins/CakePHPAppInstaller/webroot/css/site_style_vars.css';
+        $site_style_vars_file = '../vendor/cakephp-app-installer/installer/webroot/css/site_style_vars.css';
         if ($this->request->is('post')) {
             $html = $this->request->getData('site_style_vars');
             file_put_contents($site_style_vars_file, $html);
