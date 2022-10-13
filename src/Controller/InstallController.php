@@ -112,6 +112,7 @@ class InstallController extends AppController
                  * We will create the true database configuration file with our configuration
                  */
                 $success = true;
+                $soc_set = false;
                 $written = [];
 
                 foreach (Configure::read('Installer.Files') as $config) {
@@ -178,10 +179,14 @@ class InstallController extends AppController
                 if ($success) {
                     $this->Flash->success(__('Connected to the database'));
 
+
                     // Import database if import_database is checked
                     if ($import_database) {
                         $this->redirect(['action' => 'data']);
                     } else {
+                        if (!$soc_set) {
+                            $this->redirect(['action' => 'socParams']);
+                        }
                         $this->redirect(['action' => 'finish']);
                     }
                 } else {
@@ -228,6 +233,17 @@ class InstallController extends AppController
 
         $this->set($d);
     } // function
+
+
+    public function socParams() {
+        $site_style_vars_file = 'plugins/CakePHPAppInstaller/webroot/css/site_style_vars.css';
+        if ($this->request->is('post')) {
+            $html = $this->request->getData('site_style_vars');
+            file_put_contents($site_style_vars_file, $html);
+        }
+        $this->set('site_style_vars_file', file_get_contents($site_style_vars_file));
+        $this->set('title_for_layout', 'SwRI SOC Config');
+    }
 
     /**
      * @access    protected

@@ -15,7 +15,7 @@
  * @var string $title_for_layout
  */
 
-$cakeDescription = __('Cake App Installer');
+$cakeDescription = __('SwRI Generic SOC Installer');
 ?>
 <!DOCTYPE html>
 <html lang="en">
