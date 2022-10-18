@@ -238,7 +238,19 @@ class InstallController extends AppController
         //$site_style_vars_file = 'plugins/CakePHPAppInstaller/webroot/css/site_style_vars.css';
         $site_style_vars_file = '../vendor/cakephp-app-installer/installer/webroot/css/site_style_vars.css';
         if ($this->request->is('post')) {
-            $html = $this->request->getData('site_style_vars');
+            $data = $this->request->getData();
+            $html = ":root {" . PHP_EOL;
+            foreach ($data as $key => $value) {
+                if (str_starts_with($key, '--')) {
+                    $html .= "    " . $key . ": " . $value . ";" . PHP_EOL;
+                }
+            }
+            $html .= "}" . PHP_EOL;
+            $html .= PHP_EOL;
+            $html .= '/** mainTitle = ' . $data['mainTitle'] . "**/" . PHP_EOL;
+            $html .= '/** brand-text = ' . $data['brand-text'] . "**/" . PHP_EOL;
+            $html .= PHP_EOL;
+            $html .= $data['extra_styles'];
             file_put_contents($site_style_vars_file, $html);
             file_put_contents(CONFIG . 'site_style_vars.css', $html);
             $this->redirect(['action' => 'finish']);
