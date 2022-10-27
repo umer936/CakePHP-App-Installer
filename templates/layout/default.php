@@ -58,7 +58,7 @@ $cakeDescription = __('SwRI Generic SOC Installer');
     <hr>
     <footer>
         <p class="float-end">
-            <?= $this->Html->link(__('GitHub Repository'), 'https://github.com/umer936/CakePHP-App-Installer') ?>
+            <?= $this->Html->link(__('GitHub Repository'), 'https://github.com/anuj9196/CakePHP-App-Installer') ?>
             &copy; <?= date('Y') ?>
         </p>
         <p>
